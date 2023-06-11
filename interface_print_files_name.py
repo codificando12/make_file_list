@@ -15,7 +15,7 @@ def start_scan():
 
     file_list = read_dir(folder_path)
 
-    create_word_file(file_list)
+    create_word_file(file_list) 
     
 
     
