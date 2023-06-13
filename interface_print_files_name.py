@@ -11,16 +11,25 @@ def search_path():
     folder_path = filedialog.askdirectory()
     path_label.configure(text=folder_path) #this will save the folder path in a label
 
+def save_file_path():
+    global save_folder_path
+    save_folder_path = filedialog.askdirectory()
+    save_path_label.configure(text=folder_path) #this will save the folder path in a label
+
 def start_scan():
-
     file_list = read_dir(folder_path)
-
-    create_word_file(file_list) 
+    file_name = file_name_box.get()
+    create_word_file(file_list, file_name, save_folder_path)
     
+# def set_file_name():
+#     global file_name
+#     file_name = file_name_box.get()
 
-    
 folder_path = "" #save the folder path that search_path() function returns
 
+save_folder_path = "" #save the path where the user choose to save the document
+
+# file_name = "" #save file name
 
 root = Tk() #start tkinter
 
@@ -39,8 +48,25 @@ path_label.grid(row=1, column=1)
 browse_button = Button(root, text="Browse", command=search_path)
 browse_button.grid(row=1, column=2, padx=6)
 
-check_folder = Button(root, text='Scan', command=start_scan)
-check_folder.grid(row = 2, column = 2)
+file_name_label = Label(root, text="Choose \nfile name")
+file_name_label.grid(row=2, column=0)
+
+file_name_box = Entry(root, width=59)
+file_name_box.grid(row=2, column=1)
+
+save_folder = Label(root, text="Save Folder")
+save_folder.grid(row=3, column=0, padx=2, pady=2)
+
+save_path_label = Label(root, bg="White", width=50)
+save_path_label.grid(row=3, column=1)
+
+browse_button = Button(root, text="Browse", command=save_file_path)
+browse_button.grid(row=3, column=2, padx=6)
+
+scan_button = Button(root, text='Scan', command=start_scan)
+scan_button.grid(row = 4, column = 2)
+
+
 
 
 root.mainloop()
