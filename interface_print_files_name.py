@@ -19,7 +19,18 @@ def save_file_path():
 def start_scan():
     file_list = read_dir(folder_path)
     file_name = file_name_box.get()
-    create_word_file(file_list, file_name, save_folder_path)
+    word_doc = check_word.get()
+    error_label = "Please Check one Option"
+    succes_label = "File created"
+    if  word_doc == 1:
+        create_word_file(file_list, file_name, save_folder_path)
+        erase_label = Label(root, text="                                                          ")
+        erase_label.grid(row=6, column=1)
+        message_label = Label(root, text=succes_label)
+        message_label.grid(row=6, column=1)
+    else:
+        message_label = Label(root, text=error_label)
+        message_label.grid(row=6, column=1)
     
 # def set_file_name():
 #     global file_name
@@ -29,9 +40,10 @@ folder_path = "" #save the folder path that search_path() function returns
 
 save_folder_path = "" #save the path where the user choose to save the document
 
-# file_name = "" #save file name
-
 root = Tk() #start tkinter
+
+check_word = IntVar()
+check_txt = IntVar()
 
 root.geometry("500x500") # set the window dimension
 # root.resizable(False,False)
@@ -63,8 +75,11 @@ save_path_label.grid(row=3, column=1)
 browse_button = Button(root, text="Browse", command=save_file_path)
 browse_button.grid(row=3, column=2, padx=6)
 
+check_word_box = Checkbutton(root, text="Word document", variable=check_word)
+check_word_box.grid(row=4, column= 1)
+
 scan_button = Button(root, text='Scan', command=start_scan)
-scan_button.grid(row = 4, column = 2)
+scan_button.grid(row = 5, column = 2)
 
 
 
