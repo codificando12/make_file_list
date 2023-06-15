@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import filedialog
 from read_folder import read_dir
 from create_word import create_word_file
+from create_txt import create_txt_file
 from docx import Document
 
 """This function will open the folder browser for the user to choose the folder that he/she
@@ -16,20 +17,28 @@ def save_file_path():
     save_folder_path = filedialog.askdirectory()
     save_path_label.configure(text=folder_path) #this will save the folder path in a label
 
+"""This function will start the software and create the document"""
 def start_scan():
     file_list = read_dir(folder_path)
     file_name = file_name_box.get()
     word_doc = check_word.get()
+    txt_doc = check_txt.get()
     error_label = "Please Check one Option"
     succes_label = "File created"
-    if  word_doc == 1:
+    if  word_doc == 1 and txt_doc == 0:
         create_word_file(file_list, file_name, save_folder_path)
         erase_label = Label(root, text="                                                          ")
         erase_label.grid(row=6, column=1)
         message_label = Label(root, text=succes_label)
         message_label.grid(row=6, column=1)
+    elif word_doc == 0 and txt_doc == 1:
+        create_txt_file(file_list, file_name, save_folder_path)
+        erase_label = Label(root, text="                                                          ")
+        erase_label.grid(row=6, column=1)
+        message_label = Label(root, text=succes_label)
+        message_label.grid(row=6, column=1)
     else:
-        message_label = Label(root, text=error_label)
+        message_label = Label(root, text=error_label, fg="red")
         message_label.grid(row=6, column=1)
     
 # def set_file_name():
@@ -75,11 +84,14 @@ save_path_label.grid(row=3, column=1)
 browse_button = Button(root, text="Browse", command=save_file_path)
 browse_button.grid(row=3, column=2, padx=6)
 
-check_word_box = Checkbutton(root, text="Word document", variable=check_word)
+check_word_box = Checkbutton(root, text="Word Document", variable=check_word)
 check_word_box.grid(row=4, column= 1)
 
+check_txt_box = Checkbutton(root, text="Text Document", variable=check_txt)
+check_txt_box.grid(row=5, column= 1)
+
 scan_button = Button(root, text='Scan', command=start_scan)
-scan_button.grid(row = 5, column = 2)
+scan_button.grid(row = 7, column = 1, pady=10, ipadx=20)
 
 
 

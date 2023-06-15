@@ -1,9 +1,14 @@
 from docx import Document
 import os
 
+""" this funtion will take 3 parameter, 
+1 is the list, 
+2 is the file name that the user choose
+3 is the folder path
+and it will create the word document."""
 
-def create_word_file(list, file_name, save_doc_folder_path):
-    file_list = list
+def create_word_file(lst, file_name, save_doc_folder_path):
+    file_list = lst
     word_document = Document()
     for document in enumerate(file_list):
 
