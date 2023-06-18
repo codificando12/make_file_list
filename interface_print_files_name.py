@@ -15,7 +15,7 @@ def search_path():
 def save_file_path():
     global save_folder_path
     save_folder_path = filedialog.askdirectory()
-    save_path_label.configure(text=folder_path) #this will save the folder path in a label
+    save_path_label.configure(text=save_folder_path) #this will save the folder path in a label
 
 """This function will start the software and create the document"""
 def start_scan():
@@ -37,6 +37,8 @@ def start_scan():
         erase_label.grid(row=6, column=1)
         message_label = Label(root, text=succes_label)
         message_label.grid(row=6, column=1)
+        print(folder_path)
+        print(file_list)
     else:
         message_label = Label(root, text=error_label, fg="red")
         message_label.grid(row=6, column=1)
