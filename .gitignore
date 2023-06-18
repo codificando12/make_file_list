@@ -1,4 +1,5 @@
 env
 *.docx
-
+dist
+build
 __pycache__
