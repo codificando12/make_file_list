@@ -3,3 +3,6 @@ env
 dist
 build
 __pycache__
+*.spec
+*.jpg
+interface_print_files_name.spec
